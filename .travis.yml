@@ -24,5 +24,6 @@ env:
 install:
   - pip install --upgrade pip
   - pip install tox==2.0.2
+  - pip freeze
 script:
-  - tox -e $TOX_ENV
+  - tox -e $TOX_ENV -v -r
