@@ -37,9 +37,6 @@ LANGUAGES = (
     ('es', ugettext('Spanish')),
     ('el', ugettext('Greek')),
 )
-LOCALE_PATHS = (
-    os.path.join(PROJECT_ROOT, 'locale'),
-)
 
 SITE_ID = 1
 
@@ -104,8 +101,7 @@ AUTH_PROFILE_MODULE = 'profiles.Profile'
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_MUGSHOT_SIZE = 140
 
-ROOT_URLCONF = 'urls'
-WSGI_APPLICATION = 'demo.wsgi.application'
+ROOT_URLCONF = 'userena.runtests.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates/'),
