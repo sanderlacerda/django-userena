@@ -22,6 +22,7 @@ env:
 
   - TOX_ENV=coverage
 install:
-  - pip install tox==1.8.1
+  - pip install --upgrade pip
+  - pip install tox==2.0.2
 script:
   - tox -e $TOX_ENV
