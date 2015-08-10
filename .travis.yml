@@ -22,7 +22,9 @@ env:
 
   - TOX_ENV=coverage
 install:
-  - pip install --upgrade pip
+  # note: use old version of pip because the new one messes up builds on
+  #       django 1.4 & Ubuntu 12.04 (see: #480)
+  - pip install pip==6.1.1
   - pip install tox==2.0.2
   - pip freeze
 script:
