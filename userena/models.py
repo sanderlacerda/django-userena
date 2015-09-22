@@ -179,8 +179,8 @@ class UserenaSignup(models.Model):
 class UserenaBaseProfile(models.Model):
     """ Base model needed for extra profile functionality """
     PRIVACY_CHOICES = (
-        ('open', _('Open')),
-        ('registered', _('Registered')),
+        #('open', _('Open')),
+        #('registered', _('Registered')),
         ('closed', _('Closed')),
     )
 

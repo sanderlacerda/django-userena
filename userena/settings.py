@@ -8,15 +8,15 @@ gettext = lambda s: s
 
 USERENA_SIGNIN_AFTER_SIGNUP = getattr(settings,
                                       'USERENA_SIGNIN_AFTER_SIGNUP',
-                                      False)
+                                      True)
 
 USERENA_REDIRECT_ON_SIGNOUT = getattr(settings,
                                       'USERENA_REDIRECT_ON_SIGNOUT',
-                                      None)
+                                      "/")
 
 USERENA_SIGNIN_REDIRECT_URL = getattr(settings,
                                       'USERENA_SIGNIN_REDIRECT_URL',
-                                      '/accounts/%(username)s/')
+                                      "/")#'/accounts/%(username)s/'
 
 USERENA_ACTIVATION_REQUIRED = getattr(settings,
                                       'USERENA_ACTIVATION_REQUIRED',
@@ -50,7 +50,7 @@ USERENA_FORBIDDEN_USERNAMES = getattr(settings,
                                       'USERENA_FORBIDDEN_USERNAMES',
                                       ('signup', 'signout', 'signin',
                                        'activate', 'me', 'password'))
-DEFAULT_USERENA_USE_HTTPS = False
+DEFAULT_USERENA_USE_HTTPS = True
 
 # NOTE: It is only for internal use. All those settings should be refactored to only defaults
 #       as specified in #452

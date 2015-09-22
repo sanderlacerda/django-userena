@@ -10,6 +10,12 @@ from userena.compat import sha_constructor
 from userena.models import UserenaSignup
 from userena.utils import get_profile_model, get_user_model
 
+# linhas editadas
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from passwords.validators import LengthValidator
+# fim
+
 import random
 try:
     from collections import OrderedDict
@@ -18,6 +24,13 @@ except ImportError:
     from ordereddict import OrderedDict
 
 attrs_dict = {'class': 'required'}
+attrs_dict1 = {'class': 'required', 'placeholder': '', 'class': 'form-control'}
+attrs_dict2 = {'class': 'required', 'placeholder': '', 'class': 'form-control'}
+attrs_dict3 = {'class': 'required', 'placeholder': 'Email', 'class': 'form-control'}
+attrs_dict4 = {'class': 'required', 'placeholder': 'Repeat password', 'class': 'form-control'}
+attrs_dict5 = {'placeholder': 'Last name', 'class': 'form-control'}
+attrs_dict_bootstrap = {'class': 'form-control'}
+
 
 USERNAME_RE = r'^[\.\w]+$'
 
@@ -31,16 +44,16 @@ class SignupForm(forms.Form):
     """
     username = forms.RegexField(regex=USERNAME_RE,
                                 max_length=30,
-                                widget=forms.TextInput(attrs=attrs_dict),
+                                widget=forms.TextInput(attrs=attrs_dict_bootstrap),
                                 label=_("Username"),
                                 error_messages={'invalid': _('Username must contain only letters, numbers, dots and underscores.')})
-    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,
+    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict_bootstrap,
                                                                maxlength=75)),
                              label=_("Email"))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict_bootstrap,
                                                            render_value=False),
                                 label=_("Create password"))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict_bootstrap,
                                                            render_value=False),
                                 label=_("Repeat password"))
 
@@ -139,7 +152,7 @@ def identification_field_factory(label, error_required):
 
     """
     return forms.CharField(label=label,
-                           widget=forms.TextInput(attrs=attrs_dict),
+                           widget=forms.TextInput(attrs=attrs_dict1),
                            max_length=75,
                            error_messages={'required': _("%(error)s") % {'error': error_required}})
 
@@ -151,7 +164,7 @@ class AuthenticationForm(forms.Form):
     identification = identification_field_factory(_("Email or username"),
                                                   _("Either supply us with your email or username."))
     password = forms.CharField(label=_("Password"),
-                               widget=forms.PasswordInput(attrs=attrs_dict, render_value=False))
+                               widget=forms.PasswordInput(attrs=attrs_dict2, render_value=False))
     remember_me = forms.BooleanField(widget=forms.CheckboxInput(),
                                      required=False,
                                      label=_('Remember me for %(days)s') % {'days': _(userena_settings.USERENA_REMEMBER_ME_DAYS[0])})
@@ -183,7 +196,7 @@ class AuthenticationForm(forms.Form):
         return self.cleaned_data
 
 class ChangeEmailForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,
+    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict3,
                                                                maxlength=75)),
                              label=_("New email"))
 
@@ -220,9 +233,11 @@ class ChangeEmailForm(forms.Form):
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
     first_name = forms.CharField(label=_('First name'),
+                                 widget=forms.TextInput(attrs=attrs_dict_bootstrap),
                                  max_length=30,
                                  required=False)
     last_name = forms.CharField(label=_('Last name'),
+                                widget=forms.TextInput(attrs=attrs_dict_bootstrap),
                                 max_length=30,
                                 required=False)
 
@@ -242,7 +257,11 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = get_profile_model()
-        exclude = ['user']
+        exclude = ['user', 'privacy', 'passfrase']
+        widgets = {
+            'privacy': forms.Select(attrs=attrs_dict_bootstrap),
+        }
+
 
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
