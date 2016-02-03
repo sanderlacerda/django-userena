@@ -50,7 +50,8 @@ USERENA_FORBIDDEN_USERNAMES = getattr(settings,
                                       'USERENA_FORBIDDEN_USERNAMES',
                                       ('signup', 'signout', 'signin',
                                        'activate', 'me', 'password'))
-DEFAULT_USERENA_USE_HTTPS = True
+#DEFAULT_USERENA_USE_HTTPS = True
+DEFAULT_USERENA_USE_HTTPS = False
 
 # NOTE: It is only for internal use. All those settings should be refactored to only defaults
 #       as specified in #452
