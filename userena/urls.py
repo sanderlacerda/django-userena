@@ -5,6 +5,9 @@ from userena import views as userena_views
 from userena import settings as userena_settings
 from userena.compat import auth_views_compat_quirks, password_reset_uid_kwarg
 
+#arq=open('userena_logg.txt','w')
+#arq.write('ok\n')
+#arq.close
 
 def merged_dict(dict_a, dict_b):
     """Merges two dicts and returns output. It's purpose is to ease use of
@@ -112,3 +115,5 @@ urlpatterns = patterns('',
        userena_views.ProfileListView.as_view(),
        name='userena_profile_list'),
 )
+
+

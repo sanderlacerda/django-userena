@@ -2,7 +2,8 @@ from django.conf.urls import *
 from userena.contrib.umessages import views as messages_views
 from django.contrib.auth.decorators import login_required
 
-urlpatterns = patterns('',
+urlpatterns = \
+  [
     url(r'^compose/$',
         messages_views.message_compose,
         name='userena_umessages_compose'),
@@ -31,4 +32,4 @@ urlpatterns = patterns('',
     url(r'^$',
         login_required(messages_views.MessageListView.as_view()),
         name='userena_umessages_list'),
-)
+  ]

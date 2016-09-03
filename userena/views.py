@@ -23,6 +23,10 @@ from guardian.decorators import permission_required_or_403
 
 import warnings
 
+arq=open('userena_views_log.txt','w')
+arq.write('ok\n')
+arq.close
+
 class ExtraContextTemplateView(TemplateView):
     """ Add extra context to a simple template view """
     extra_context = None
